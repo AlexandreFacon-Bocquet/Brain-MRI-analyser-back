@@ -80,6 +80,14 @@ def contrastImage(gamma: float, alpha: float, choice: str):
 
     return "contrast changed successfully"
 
+@app.route('/zoom/<string:image>/<int:firstX>/<int:firstY>/<int:endX>/<int:endY>', methods=['POST'])
+@cross_origin(supports_credentials=True, origins="*")
+def zoom_mri(image:str, firstX:int, firstY:int, endX:int, endY:int): # permet de retourner l'image zommé entre 2 points ⎡ ⎦
+    img = cv.imread('../client/src/image/'+image)#, cv.IMREAD_GRAYSCALE)
+    cropped_img = img[firstX:endX, firstY:endY] # [ | , -- ]
+    cv.imwrite('../client/src/image/zoom.jpg', cropped_img)
+    return "zoom changed successfully"
+
 
 if __name__ == "__main__":
     app.run(debug=True)

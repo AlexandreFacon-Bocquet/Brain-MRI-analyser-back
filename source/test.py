@@ -37,4 +37,11 @@ print(base64_encoded)
 #print('\n\n', encoded_string)
 #print('\n\n', encoded_string.decode('utf-8'))
 
+def zoom_mri(image, firstX, firstY, endX, endY): # permet de retourner l'image zommé entre 2 points ⎡ ⎦
+    img = cv.imread('../client/src/image/'+image, cv.IMREAD_GRAYSCALE)
+    cropped_img = img[firstX:endX, firstY:endY] # [ | , -- ]
+    cv.imwrite('../client/src/image/zoom.jpg', cropped_img)
+
+zoom_mri('original.jpg', 0,0,100,100)
+
 
